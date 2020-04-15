@@ -12,7 +12,7 @@ npm install
 npm start
 ```
 
-Use fake user with _email_ 'test@test.me' and _password_: 'test' to login.
+Use fake user with _email_ `test@test.me` and _password_: `test` to login.
 
 ### Compiles and hot-reloads for development
 
