@@ -1,12 +1,14 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const fakeJWTSecretKey = 'top-secret-jwt-ky';
 const fakeUser = { email: 'test@test.me', password: 'test', name: 'Ivan' };
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json({ limit: '1mb' }));
 app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
 
