@@ -26,6 +26,8 @@
     "eslint-plugin-vue": "^6.2.2",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

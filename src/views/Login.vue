@@ -12,6 +12,8 @@
       <input type="password" name="password" v-model="password" />
 
       <button type="submit" name="button">Login</button>
+
+      <p v-if="error" class="error-message">{{ error }}</p>
     </form>
   </div>
 </template>
@@ -21,7 +23,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: null
     };
   },
   methods: {
@@ -31,7 +34,10 @@ export default {
           email: this.email,
           password: this.password
         })
-        .then(() => this.$router.push({ name: 'dashboard' }));
+        .then(() => this.$router.push({ name: 'dashboard' }))
+        .catch(error => {
+          this.error = error.response.data.data.message;
+        });
     }
   }
 };

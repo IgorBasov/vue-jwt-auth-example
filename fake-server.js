@@ -20,18 +20,22 @@ app.post('/login', (req, res) => {
     const token = jwt.sign({ userInfo: { name, email } }, fakeJWTSecretKey);
 
     res.json({
-      token,
-      email,
-      name
+      success: 1,
+      data: { token, email, name }
     });
   } else {
-    res.sendStatus(400);
+    res
+      .status(400)
+      .json({ success: 0, data: { message: 'Wrong email and/or password' } });
   }
 });
 
 // Protected route
 app.get('/whoami', authMiddleware, (req, res) => {
-  res.json(req.user);
+  res.json({
+    success: 1,
+    data: req.user
+  });
 });
 
 // Auth middleware
@@ -47,8 +51,9 @@ function authMiddleware(req, res, next) {
       next();
     });
   } catch (error) {
-    console.error(error);
-    res.sendStatus(401);
+    res
+      .status(401)
+      .json({ success: 0, data: { message: 'Authorization error' } });
   }
 }
 
