@@ -1,14 +1,23 @@
 <template>
   <div>
     <h3>Home page</h3>
+    <p v-if="!loggedIn">
+      Please,
+      <router-link to="/login">login</router-link>
+    </p>
   </div>
 </template>
 
 <script>
-export default {};
+import { authComputed } from '../vuex/helpers';
+
+export default {
+  computed: {
+    ...authComputed
+  }
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Dashboard from './views/Dashboard.vue';
+import Login from './views/Login.vue';
 
 Vue.use(Router);
 
@@ -17,9 +18,26 @@ const router = new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user');
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next('/');
+  } else {
+    next();
+  }
 });
 
 export default router;
